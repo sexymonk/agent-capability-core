@@ -10,6 +10,7 @@
       { "name": "imagegen", "source": "skills/imagegen" },
       { "name": "local-file-links", "source": "skills/local-file-links" },
       { "name": "markdown-to-pdf", "source": "skills/markdown-to-pdf" },
+      { "name": "memory-maintenance", "source": "skills/memory-maintenance" },
       { "name": "openai-api-smoke-test", "source": "skills/openai-api-smoke-test" },
       { "name": "pdf", "source": "skills/pdf" },
       { "name": "playwright-interactive", "source": "skills/playwright-interactive" },

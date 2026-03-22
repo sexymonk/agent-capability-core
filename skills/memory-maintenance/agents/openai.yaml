@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memory Maintenance"
+  short_description: "Maintain shared/runtime memory families and sidecar retrieval"
+  default_prompt: "Use the generic memory core, keep shared memory file-backed, and treat SQLite sidecars as derived indexes only."

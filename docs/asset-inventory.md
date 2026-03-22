@@ -8,6 +8,7 @@
 - imagegen
 - local-file-links
 - markdown-to-pdf
+- memory-maintenance
 - openai-api-smoke-test
 - pdf
 - playwright-interactive
