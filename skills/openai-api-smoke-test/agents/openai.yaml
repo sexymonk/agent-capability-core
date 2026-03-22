@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenAI API Smoke Test"
+  short_description: "Probe OpenAI keys and confirm basic API access."
+  default_prompt: "Use $openai-api-smoke-test to verify whether my OpenAI API keys can still make requests and read admin usage."

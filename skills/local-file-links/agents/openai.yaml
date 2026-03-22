@@ -1,0 +1,4 @@
+interface:
+  display_name: "Local File Links"
+  short_description: "Return local file paths as clickable absolute blue links."
+  default_prompt: "Use $local-file-links to format local file and directory references as clickable absolute links in Codex outputs."

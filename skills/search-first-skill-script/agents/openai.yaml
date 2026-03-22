@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Search-First Skill Script"
+  short_description: "Search and adapt existing skills/scripts before generating"
+  default_prompt: "Find an existing online skill or script first, adapt it locally, and only generate from scratch if no suitable reference exists."

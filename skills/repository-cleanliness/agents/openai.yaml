@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repository Cleanliness"
+  short_description: "Keep repos free of helper artifacts by default"
+  default_prompt: "Use external workspaces for auxiliary files and clean accidental repo clutter immediately."

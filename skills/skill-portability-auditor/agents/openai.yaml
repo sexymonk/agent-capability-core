@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Skill Portability Auditor"
+  short_description: "Audit and generalize skills across model environments"
+  default_prompt: "Audit the local skills for model-specific coupling, rewrite the non-portable ones, and preserve intentional vendor-specific skills with cleaner boundaries."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Safe Commit Sync"
+  short_description: "Safely scope, commit, rebase, and push Git changes."
+  default_prompt: "Use $safe-commit-sync to commit and push my local changes without disturbing unrelated work."

@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Skill Self Update"
+  short_description: "Turn corrections and approved workflows into skill updates"
+  default_prompt: "Apply this reusable correction or approved workflow to the right local skill, record the durable lesson, and summarize what changed."

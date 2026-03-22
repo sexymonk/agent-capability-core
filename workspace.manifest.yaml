@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "workspace_id": "agent-capability-core",
+  "workspace_kind": "shared-capability-core",
+  "runtime_mounts": {
+    "skills": [
+      { "name": "agent-browser", "source": "skills/agent-browser" },
+      { "name": "doc", "source": "skills/doc" },
+      { "name": "fail-fast-coding", "source": "skills/fail-fast-coding" },
+      { "name": "imagegen", "source": "skills/imagegen" },
+      { "name": "local-file-links", "source": "skills/local-file-links" },
+      { "name": "markdown-to-pdf", "source": "skills/markdown-to-pdf" },
+      { "name": "openai-api-smoke-test", "source": "skills/openai-api-smoke-test" },
+      { "name": "pdf", "source": "skills/pdf" },
+      { "name": "playwright-interactive", "source": "skills/playwright-interactive" },
+      { "name": "pptx", "source": "skills/pptx" },
+      { "name": "repository-cleanliness", "source": "skills/repository-cleanliness" },
+      { "name": "safe-commit-sync", "source": "skills/safe-commit-sync" },
+      { "name": "screenshot", "source": "skills/screenshot" },
+      { "name": "screenshot-sequence-video", "source": "skills/screenshot-sequence-video" },
+      { "name": "slides", "source": "skills/slides" },
+      { "name": "sora", "source": "skills/sora" },
+      { "name": "speech", "source": "skills/speech" },
+      { "name": "theme-factory", "source": "skills/theme-factory" },
+      { "name": "transcribe", "source": "skills/transcribe" },
+      { "name": "workflow-solidifier", "source": "skills/workflow-solidifier" },
+      { "name": "search-first-skill-script", "source": "skills/search-first-skill-script" },
+      { "name": "skill-portability-auditor", "source": "skills/skill-portability-auditor" },
+      { "name": "skill-self-update", "source": "skills/skill-self-update" }
+    ],
+    "memories": []
+  },
+  "excluded_local_assets": [
+    ".system skills",
+    "auth/config/session/sqlite/cache",
+    "clipboard/profile and other private memory",
+    "machine-local files"
+  ],
+  "doctor_checks": [
+    "manifest",
+    "skills-present",
+    "machine-local",
+    "codex-home"
+  ]
+}

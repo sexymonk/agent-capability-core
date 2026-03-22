@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "workspace_id": "agent-capability-core",
+  "codex_home": "C:/Users/13227/.codex",
+  "codex_local_home": "C:/Users/13227/.codex-local",
+  "repo_paths": {
+    "agent-capability-core": "D:/Codex/agent-capability-core",
+    "peridyno-agent-workbench": "D:/Codex/peridyno-agent-workbench"
+  }
+}

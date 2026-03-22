@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fail-Fast Coding"
+  short_description: "Prefer strict contracts, no defensive fallbacks"
+  default_prompt: "When modifying code, avoid defensive fallback logic and prefer fast failure with explicit contracts."

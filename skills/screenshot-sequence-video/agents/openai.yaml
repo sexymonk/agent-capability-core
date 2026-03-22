@@ -1,0 +1,4 @@
+interface:
+  display_name: "Screenshot Sequence Video"
+  short_description: "Folder/manifest to MP4 clips"
+  default_prompt: "Use $screenshot-sequence-video to convert screenshot or image sequences into deterministic MP4 review videos from a folder, glob, numbered pattern, or JSON capture manifest, especially for sparse frame-step capture workflows that need per-sequence grouping and sidecar reports."
