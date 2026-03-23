@@ -4,6 +4,17 @@
 
 `agent-capability-core` is a portable shared workspace for reusable agent skills, supporting references, and workspace metadata. Review changes against that goal first: portability, inspectability, reproducibility, and exclusion of user-private state matter more than local convenience.
 
+## Review stance
+
+Review this repository from the outside in:
+
+1. repository and workspace contract
+2. system/framework implications
+3. skill or script boundary correctness
+4. file-level implementation details
+
+Do not start with isolated line edits when the real change affects exported runtime layout, skill packaging, manifest semantics, or portability guarantees.
+
 ## What reviews should prioritize
 
 ### 1. Portability over machine-specific convenience
@@ -41,7 +52,19 @@ When a change adds, removes, renames, or materially changes an exported skill, v
 
 Treat missing manifest/doc follow-through as a real issue, not a nit.
 
-### 4. Fail-fast code and scripts
+### 4. Framework and runtime-mount behavior
+
+Pay special attention to changes that alter how skills are exported, mounted, discovered, or referenced at runtime.
+
+Flag diffs that:
+
+- work only from a repo checkout but break once exported into `$CODEX_HOME/skills/<name>`
+- rely on repo-level siblings that are absent in the runtime mount layout
+- change naming, mount topology, schema lookup, script lookup, or manifest-driven runtime behavior without updating companion files
+
+When possible, explain the failure at the system level first, then point to the local line evidence.
+
+### 5. Fail-fast code and scripts
 
 This repo prefers straightforward, auditable logic.
 
@@ -58,7 +81,7 @@ Prefer:
 - clear errors
 - one obvious execution path
 
-### 5. Repository cleanliness
+### 6. Repository cleanliness
 
 Do not allow conversation-specific clutter into the repo.
 
@@ -70,7 +93,7 @@ Flag additions such as:
 
 Only project-owned source, tests, docs, configuration, and reusable assets belong here.
 
-### 6. Minimal, scoped changes
+### 7. Minimal, scoped changes
 
 Prefer narrow diffs that solve the stated problem directly.
 
@@ -80,7 +103,7 @@ Flag PRs that:
 - rename or reorganize broad parts of the workspace without a stated reason
 - modify exported skills and repo-wide metadata opportunistically
 
-### 7. Review for private-state leaks
+### 8. Review for private-state leaks
 
 Pay extra attention to:
 
@@ -91,6 +114,55 @@ Pay extra attention to:
 
 These should generally stay outside this repository.
 
+## Required review output structure
+
+Structure every review from macro to micro. Prefer one coherent narrative over a loose list of unrelated line comments.
+
+### A. Change synopsis
+
+Start with 2-4 bullets that summarize:
+
+- what this PR changes at the repository or subsystem level
+- which exported skills, runtime contracts, or framework behaviors are affected
+- whether the diff is primarily architectural, packaging, validation, or local implementation work
+
+### B. System or framework impact
+
+Before discussing file-local details, explicitly answer:
+
+- does this change alter runtime export layout, manifest expectations, or mount behavior?
+- does it change how skills resolve scripts, schemas, docs, or assets?
+- does it create contract drift between repo layout and exported runtime layout?
+
+If the answer is yes, lead with that system-level consequence.
+
+### C. Risk-ranked findings
+
+Present findings in descending order of impact:
+
+1. repository/workspace contract breakage
+2. framework/runtime-layout breakage
+3. skill self-containment or portability regressions
+4. implementation bugs inside a file
+5. minor clarity or maintenance notes
+
+For each finding, use this shape:
+
+- **Title:** concise statement of the broken contract or risk
+- **Why it matters:** describe the subsystem, workflow, or runtime behavior affected
+- **Evidence:** point to the relevant file and local change
+- **Requested fix:** say what companion update, redesign, or narrower change would resolve it
+
+### D. File-local comments
+
+Use inline or file-local comments only after the system context is established. Each local comment should tie back to the larger contract when one exists.
+
+Do not present low-level line comments as if they were independent when they are symptoms of the same higher-level issue.
+
+### E. No-issue outcome
+
+If no material problems are found, say so explicitly and briefly summarize why the change appears coherent at the repository, framework, and file levels.
+
 ## Validation expectations
 
 When relevant, prefer review comments that ask the author to verify the real contract:
@@ -99,12 +171,16 @@ When relevant, prefer review comments that ask the author to verify the real con
 - confirm `link_runtime_mounts.ps1` changes still match manifest expectations
 - check that referenced files in `SKILL.md` exist at the stated repo-relative paths
 - verify docs still match the exported inventory
+- validate that repo-relative references still make sense after runtime export/mount
 
 Do not demand extra verification when the diff is docs-only and clearly cannot affect runtime behavior.
 
 ## Comment style
 
 - Prefer high-signal findings on correctness, portability, safety, and contract drift.
+- Emphasize system, framework, and exported-runtime implications before file-local detail.
+- Describe changes from macro to micro: repository -> subsystem -> file -> line.
+- Group related symptoms under one higher-level finding instead of scattering duplicate comments.
 - Do not nitpick style unless it harms portability, clarity, or maintenance.
 - Be especially strict about repo-boundary violations and missing companion updates.
 - If a change is acceptable, avoid inventing speculative issues.
