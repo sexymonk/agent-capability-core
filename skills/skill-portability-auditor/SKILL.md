@@ -1,4 +1,4 @@
-﻿---
+---
 name: skill-portability-auditor
 description: Use when a user wants to audit local skills for portability across different models or agent environments, or wants non-portable skills rewritten so other people can reuse them outside the current model-specific setup.
 ---

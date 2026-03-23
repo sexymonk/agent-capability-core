@@ -1,4 +1,4 @@
-﻿---
+---
 name: search-first-skill-script
 description: Use when a user needs a new skill or script and the preferred workflow is to search the internet for existing skills, scripts, repositories, or examples first, then download or vendorize them locally, adapt them to the local environment, and only generate from scratch when no suitable reference exists.
 ---

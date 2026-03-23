@@ -1,4 +1,4 @@
-﻿---
+---
 name: skill-self-update
 description: Use when a user gives a clear, generalizable correction about how a local skill should trigger or behave, or when a novel multi-step workflow is completed and the user approves continuing with it. Update the owning skill or create a narrow new skill, and record durable rules plus avoided paths under ~/.codex/skills.
 ---
