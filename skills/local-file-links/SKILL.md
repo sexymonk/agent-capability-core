@@ -32,16 +32,16 @@ The goal is simple: never leave a useful local path as plain text when a clickab
 Use patterns like these:
 
 ```md
-Result file: [report.md](/C:/Users/13227/Documents/report.md)
+Result file: [report.md](/absolute/path/report.md)
 ```
 
 ```md
-Folder: [exports](/D:/codex_aux/exports)
-File: [summary.pdf](/D:/codex_aux/exports/summary.pdf)
+Folder: [exports](/absolute/path/exports)
+File: [summary.pdf](/absolute/path/exports/summary.pdf)
 ```
 
 ```md
-Code: [main.cpp](/D:/Project/src/main.cpp)
+Code: [main.cpp](/absolute/path/project/src/main.cpp)
 ```
 
 ## Avoid

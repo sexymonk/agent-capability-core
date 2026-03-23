@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -13,7 +14,7 @@ from typing import Any
 from PIL import Image
 
 
-KNOWN_FFMPEG = Path(r"D:\Download\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg.exe")
+FFMPEG_ENV_VARS = ("FFMPEG_BIN", "FFMPEG_PATH")
 IMAGE_EXTENSIONS = {".bmp", ".png", ".jpg", ".jpeg", ".tif", ".tiff", ".webp"}
 
 
@@ -110,19 +111,29 @@ def natural_sort_key(value: str) -> list[Any]:
     return key
 
 
+def resolve_ffmpeg_candidate(value: str, *, label: str) -> Path:
+    path = Path(value).expanduser()
+    if path.exists():
+        return path
+    resolved = shutil.which(value)
+    if resolved:
+        return Path(resolved)
+    raise RuntimeError(f"{label} not found: {value}")
+
+
 def resolve_ffmpeg(explicit_path: str | None) -> Path:
     if explicit_path:
-        path = Path(explicit_path)
-        if not path.exists():
-            raise RuntimeError(f"Explicit ffmpeg path not found: {path}")
-        return path
-    if KNOWN_FFMPEG.exists():
-        return KNOWN_FFMPEG
+        return resolve_ffmpeg_candidate(explicit_path, label="Explicit ffmpeg path")
+    for env_name in FFMPEG_ENV_VARS:
+        env_value = os.environ.get(env_name)
+        if env_value:
+            return resolve_ffmpeg_candidate(env_value, label=f"{env_name} environment variable")
     resolved = shutil.which("ffmpeg")
     if resolved:
         return Path(resolved)
     raise RuntimeError(
-        f"ffmpeg executable not found. Expected {KNOWN_FFMPEG} or an ffmpeg on PATH."
+        "ffmpeg executable not found. Set FFMPEG_BIN or FFMPEG_PATH, "
+        "or install ffmpeg on PATH."
     )
 
 

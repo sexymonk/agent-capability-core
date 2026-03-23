@@ -37,20 +37,20 @@ This workflow is based on FFmpeg's standard image-sequence mechanisms, but optim
 
 ### Manifest-driven review clips
 
-```powershell
-python C:\Users\13227\.codex\skills\screenshot-sequence-video\scripts\sequence_to_video.py \
-  --manifest D:\captures\capture_manifest.json \
-  --output-dir D:\captures\videos
+```bash
+python scripts/sequence_to_video.py \
+  --manifest ./captures/capture_manifest.json \
+  --output-dir ./captures/videos
 ```
 
 ### Single folder to one clip
 
-```powershell
-python C:\Users\13227\.codex\skills\screenshot-sequence-video\scripts\sequence_to_video.py \
-  --input-dir D:\captures\gap-closeup \
+```bash
+python scripts/sequence_to_video.py \
+  --input-dir ./captures/gap-closeup \
   --glob "screen_capture_*.bmp" \
   --sequence-id gap-closeup \
-  --output-dir D:\captures\videos
+  --output-dir ./captures/videos
 ```
 
 ## Output contract
@@ -70,5 +70,5 @@ The script writes:
 
 ## Resources
 
-- Script: [scripts/sequence_to_video.py](/C:/Users/13227/.codex/skills/screenshot-sequence-video/scripts/sequence_to_video.py)
-- Learning log: [references/learning-log.md](/C:/Users/13227/.codex/skills/screenshot-sequence-video/references/learning-log.md)
+- Script: [scripts/sequence_to_video.py](scripts/sequence_to_video.py)
+- Learning log: [references/learning-log.md](references/learning-log.md)

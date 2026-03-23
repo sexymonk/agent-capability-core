@@ -18,7 +18,7 @@ This skill enforces a repository hygiene rule: source repositories should contai
 ## External Workspace Policy
 
 - Derive an external helper directory from the repository name when the user does not specify one.
-- Preferred pattern on Windows: `D:\codex_aux\<repo-name>\`
+- Preferred pattern on Windows: `<external-workspace>\<repo-name>\`
 - User-facing deliverables may go to a user-specified external location such as a meeting-report folder, but the generating scripts and scratch files should still stay outside the repo.
 - Create external directories as needed before generating artifacts.
 
