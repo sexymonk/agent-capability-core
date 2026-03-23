@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Merge Governor"
+  short_description: "Audit contributor merges for overlapping skills and redundant scripts."
+  default_prompt: "Use $skill-merge-governor to review this incoming merge for duplicate skills, ambiguous triggers, and scripts that should be unified."

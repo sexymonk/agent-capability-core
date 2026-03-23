@@ -24,6 +24,7 @@
 - transcribe
 - workflow-solidifier
 - search-first-skill-script
+- skill-merge-governor
 - skill-portability-auditor
 - skill-self-update
 
