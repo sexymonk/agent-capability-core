@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from codex_workspace import codex_home, load_json_yaml, load_manifest, normalize_path
+from codex_workspace import load_json_yaml, load_manifest, normalize_path, runtime_home
 
 
 ABS_PATH_RE = re.compile(r"^(?:[A-Za-z]:[\\/]|/(?!/))")
@@ -180,13 +180,13 @@ class FamilyContext:
 
 def runtime_root_for_family(workspace_root: Path, family_definition: dict[str, Any]) -> Path:
     runtime_target = str(family_definition.get("runtime_target") or family_definition["name"])
-    return (codex_home(workspace_root) / "memories" / runtime_target).resolve()
+    return (runtime_home(workspace_root) / "memories" / runtime_target).resolve()
 
 
 def sidecar_path_for_family(workspace_root: Path, manifest: dict[str, Any], family_definition: dict[str, Any]) -> Path:
     runtime_target = str(family_definition.get("runtime_target") or family_definition["name"])
     workspace_id = str(manifest.get("workspace_id") or workspace_root.name)
-    return (codex_home(workspace_root) / "memories" / ".sidecar" / workspace_id / f"{runtime_target}.sqlite").resolve()
+    return (runtime_home(workspace_root) / "memories" / ".sidecar" / workspace_id / f"{runtime_target}.sqlite").resolve()
 
 
 def selected_families(manifest: dict[str, Any], requested: list[str]) -> list[dict[str, Any]]:

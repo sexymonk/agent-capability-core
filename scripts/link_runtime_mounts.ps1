@@ -2,7 +2,9 @@
 param(
     [Parameter(Mandatory = $true)]
     [string[]]$WorkspaceRoot,
-    [string]$CodexHome = "",
+    [string]$RuntimeHome = "",
+    [Alias('CodexHome')]
+    [string]$LegacyCodexHome = "",
     [string]$BackupRoot = ""
 )
 
@@ -52,9 +54,9 @@ function Ensure-Junction {
     New-Item -ItemType Junction -Path $LinkPath -Target $TargetPath | Out-Null
 }
 
-$resolvedCodexHome = if ($CodexHome) { Ensure-Dir -Path $CodexHome } else { Ensure-Dir -Path (Join-Path $HOME '.codex') }
-$resolvedBackupRoot = if ($BackupRoot) { Ensure-Dir -Path $BackupRoot } else { Ensure-Dir -Path (Join-Path (Join-Path $resolvedCodexHome '.runtime-link-backups') (Get-Date -Format 'yyyyMMdd_HHmmss')) }
-$skillsRoot = Ensure-Dir -Path (Join-Path $resolvedCodexHome 'skills')
+$resolvedRuntimeHome = if ($RuntimeHome) { Ensure-Dir -Path $RuntimeHome } elseif ($LegacyCodexHome) { Ensure-Dir -Path $LegacyCodexHome } else { Ensure-Dir -Path (Join-Path $HOME '.codex') }
+$resolvedBackupRoot = if ($BackupRoot) { Ensure-Dir -Path $BackupRoot } else { Ensure-Dir -Path (Join-Path (Join-Path $resolvedRuntimeHome '.runtime-link-backups') (Get-Date -Format 'yyyyMMdd_HHmmss')) }
+$skillsRoot = Ensure-Dir -Path (Join-Path $resolvedRuntimeHome 'skills')
 $results = @()
 
 foreach ($workspace in $WorkspaceRoot) {

@@ -1,10 +1,45 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "workspace_id": "agent-capability-core",
-  "codex_home": "C:/Users/13227/.codex",
-  "codex_local_home": "C:/Users/13227/.codex-local",
+  "runtime": {
+    "provider": "codex_cli",
+    "channel": "cli",
+    "home": "C:/Users/<User>/.codex",
+    "local_home": "C:/Users/<User>/.codex-local",
+    "command": "C:/Users/<User>/.codex/.sandbox-bin/codex.exe",
+    "args_template": [],
+    "env": {},
+    "capabilities": [
+      "workspace_mount",
+      "memory_runtime",
+      "chat_bridge",
+      "session_resume",
+      "linear"
+    ],
+    "exports_root": "C:/Users/<User>/.codex-local/agent-capability-core/exports"
+  },
+  "codex_home": "C:/Users/<User>/.codex",
+  "codex_local_home": "C:/Users/<User>/.codex-local",
   "repo_paths": {
     "agent-capability-core": "D:/Codex/agent-capability-core",
     "peridyno-agent-workbench": "D:/Codex/peridyno-agent-workbench"
+  },
+  "network": {
+    "profile": "auto",
+    "proxy": {
+      "http": "",
+      "https": "",
+      "no_proxy": ""
+    },
+    "mirrors": {
+      "pip_index_url": "",
+      "qt_base_url": "",
+      "cuda_docs_url": ""
+    },
+    "offline_cache_root": ""
+  },
+  "install": {
+    "state_path": "C:/Users/<User>/.codex-local/agent-capability-core/install-state.json",
+    "download_cache": "C:/Users/<User>/.codex-local/agent-capability-core/downloads"
   }
 }

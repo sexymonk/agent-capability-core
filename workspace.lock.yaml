@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "workspace_id": "agent-capability-core",
+  "workspace_api_version": 3,
+  "repositories": {
+    "agent-capability-core": {
+      "ref": "0dd374e013fa0af85aa68c9379283a22fccc8b40",
+      "branch": "main"
+    }
+  },
+  "toolchains": {
+    "bootstrap": {
+      "git": {
+        "package_id": "Git.Git"
+      },
+      "gh": {
+        "package_id": "GitHub.cli"
+      },
+      "python": {
+        "package_id": "Python.Python.3.12",
+        "version": "3.12"
+      },
+      "cmake": {
+        "package_id": "Kitware.CMake"
+      }
+    }
+  }
+}

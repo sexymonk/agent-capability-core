@@ -1,10 +1,10 @@
 # agent-capability-core
 
-Shared Codex skills, scripts, and workspace metadata for reusable local agent capabilities.
+Shared skills, scripts, and workspace metadata for reusable local agent capabilities.
 
 ## Overview
 
-`agent-capability-core` is a source-of-truth workspace for portable Codex skills and their supporting assets. It packages reusable capabilities such as document handling, screenshot capture, slide generation, speech, transcription, video tooling, browser automation, and workflow solidification into a single repo that can be mounted into a local Codex runtime.
+`agent-capability-core` is a source-of-truth workspace for portable skills and their supporting assets. It packages reusable capabilities such as document handling, screenshot capture, slide generation, speech, transcription, video tooling, browser automation, and workflow solidification into a single repo that can be exported into a provider-neutral runtime and, when supported, mounted into a specific AI runtime home.
 
 This repository is intended to be:
 
@@ -17,10 +17,12 @@ This repository is intended to be:
 
 ```text
 .
+|- bootstrap/                 public bootstrap entrypoints
 |- docs/                      project notes and inventories
 |- schemas/                   shared schema documents
 |- scripts/                   workspace-level helper scripts
 |- skills/                    reusable Codex skills
+|- workspace.lock.yaml
 |- machine.local.template.yaml
 |- workspace.manifest.yaml
 `- README.md
@@ -54,12 +56,12 @@ cd agent-capability-core
 
 Copy `machine.local.template.yaml` to `machine.local.yaml` and adjust the paths for your machine.
 
-### 3. Mount the skills into your Codex home
+### 3. Mount the skills into your runtime home
 
-Use the workspace linker to create runtime junctions under your local Codex skills directory:
+Use the workspace linker to create runtime junctions under your local runtime skills directory:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\link_runtime_mounts.ps1 -WorkspaceRoot .
+powershell -ExecutionPolicy Bypass -File .\scripts\link_runtime_mounts.ps1 -WorkspaceRoot . -RuntimeHome $env:CODEX_HOME
 ```
 
 ### 4. Verify the workspace
@@ -68,11 +70,22 @@ powershell -ExecutionPolicy Bypass -File .\scripts\link_runtime_mounts.ps1 -Work
 python .\scripts\doctor.py
 ```
 
-The doctor script validates the manifest, expected skill paths, and machine-local configuration.
+The doctor script validates the manifest, expected skill paths, runtime/provider configuration, and machine-local configuration.
+
+## Public installer entrypoint
+
+This repo also hosts the public Windows installer that can bootstrap the private PeriDyno workbench:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\bootstrap\install-peridyno-workbench.ps1
+```
+
+That path installs minimal bootstrap tools, authenticates with GitHub CLI when needed, clones the private workbench, and hands off to the workbench bootstrap.
 
 ## Workspace contract
 
 - `workspace.manifest.yaml` is the exported runtime contract for this repository.
+- `workspace.lock.yaml` records the tested repo ref for reproducible restore.
 - `machine.local.yaml` is intentionally local-only and should not be committed.
 - `skills/` contains the reusable capabilities that may be mounted into a Codex runtime.
 - repo-specific or private skills should stay outside this core workspace unless they are intentionally generalized.

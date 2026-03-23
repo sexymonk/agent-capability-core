@@ -1,33 +1,288 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
+  "workspace_api_version": 3,
   "workspace_id": "agent-capability-core",
   "workspace_kind": "shared-capability-core",
+  "repositories": [
+    {
+      "repo_id": "agent-capability-core",
+      "clone_url": "https://github.com/sexymonk/agent-capability-core.git",
+      "visibility": "public",
+      "auth_mode": "none",
+      "default_relative_path": ".",
+      "default_branch": "main",
+      "required": true
+    }
+  ],
+  "restore_modes": {
+    "auto": {
+      "description": "Choose non_intrusive when an existing compatible environment is detected; otherwise strict.",
+      "bootstrap_install_tools": true,
+      "manage_existing_repos": "auto",
+      "install_main_toolchains": "auto"
+    },
+    "strict": {
+      "description": "Restore the locked baseline and install missing locked toolchains when allowed.",
+      "bootstrap_install_tools": true,
+      "manage_existing_repos": "locked",
+      "install_main_toolchains": "locked"
+    },
+    "non_intrusive": {
+      "description": "Reuse compatible local environments and avoid changing the machine default toolchain.",
+      "bootstrap_install_tools": true,
+      "manage_existing_repos": "preserve",
+      "install_main_toolchains": "compatible-only",
+      "install_visual_studio_major": "never"
+    },
+    "repair": {
+      "description": "Repair workspace structure and runtime exports without taking over existing repos or toolchains.",
+      "bootstrap_install_tools": false,
+      "manage_existing_repos": "verify-only",
+      "install_main_toolchains": "repair-only"
+    }
+  },
+  "toolchains": {
+    "bootstrap": [
+      {
+        "name": "git",
+        "command": "git",
+        "package_id": "Git.Git",
+        "silent": true,
+        "requires_admin": true
+      },
+      {
+        "name": "gh",
+        "command": "gh",
+        "package_id": "GitHub.cli",
+        "silent": true,
+        "requires_admin": true
+      },
+      {
+        "name": "python",
+        "command": "python",
+        "package_id": "Python.Python.3.12",
+        "silent": true,
+        "requires_admin": false
+      },
+      {
+        "name": "cmake",
+        "command": "cmake",
+        "package_id": "Kitware.CMake",
+        "silent": true,
+        "requires_admin": true
+      }
+    ]
+  },
+  "network_profiles": {
+    "auto": {
+      "allow_proxy_env": true,
+      "allow_mirrors": true
+    },
+    "direct": {
+      "allow_proxy_env": false,
+      "allow_mirrors": false
+    },
+    "proxy": {
+      "allow_proxy_env": true,
+      "allow_mirrors": false
+    },
+    "mirror": {
+      "allow_proxy_env": true,
+      "allow_mirrors": true
+    }
+  },
+  "ai_providers": {
+    "codex_desktop": {
+      "channel": "desktop",
+      "default_home": "~/.codex",
+      "default_local_home": "~/.codex-local",
+      "default_command": "~/.codex/.sandbox-bin/codex.exe",
+      "capabilities": [
+        "workspace_mount",
+        "memory_runtime",
+        "chat_bridge",
+        "session_resume",
+        "linear"
+      ]
+    },
+    "codex_vscode": {
+      "channel": "vscode",
+      "default_home": "~/.codex",
+      "default_local_home": "~/.codex-local",
+      "default_command": "codex",
+      "capabilities": [
+        "workspace_mount",
+        "memory_runtime"
+      ]
+    },
+    "codex_cli": {
+      "channel": "cli",
+      "default_home": "~/.codex",
+      "default_local_home": "~/.codex-local",
+      "default_command": "codex",
+      "capabilities": [
+        "workspace_mount",
+        "memory_runtime",
+        "chat_bridge",
+        "session_resume",
+        "linear"
+      ]
+    },
+    "claude_code": {
+      "channel": "cli",
+      "default_home": "~/.claude",
+      "default_local_home": "~/.codex-local",
+      "default_command": "claude",
+      "capabilities": [
+        "memory_runtime"
+      ]
+    },
+    "gemini_cli": {
+      "channel": "cli",
+      "default_home": "~/.gemini",
+      "default_local_home": "~/.codex-local",
+      "default_command": "gemini",
+      "capabilities": [
+        "memory_runtime"
+      ]
+    },
+    "external": {
+      "channel": "external",
+      "default_home": "~/.agent-runtime/external",
+      "default_local_home": "~/.codex-local",
+      "default_command": "",
+      "capabilities": [
+        "memory_runtime"
+      ]
+    }
+  },
+  "integrations": {
+    "runtime_export": {
+      "enabled": true
+    },
+    "workspace_mount": {
+      "requires": [
+        "workspace_mount"
+      ]
+    },
+    "memory_runtime": {
+      "requires": [
+        "memory_runtime"
+      ]
+    }
+  },
+  "install_defaults": {
+    "workspace_base_candidates": [
+      "D:/Codex",
+      "~/Codex"
+    ],
+    "runtime_local_home_default": "~/.codex-local"
+  },
+  "compat": {
+    "workspace_api_version": 3
+  },
   "runtime_mounts": {
     "skills": [
-      { "name": "agent-browser", "source": "skills/agent-browser" },
-      { "name": "doc", "source": "skills/doc" },
-      { "name": "fail-fast-coding", "source": "skills/fail-fast-coding" },
-      { "name": "imagegen", "source": "skills/imagegen" },
-      { "name": "local-file-links", "source": "skills/local-file-links" },
-      { "name": "markdown-to-pdf", "source": "skills/markdown-to-pdf" },
-      { "name": "memory-maintenance", "source": "skills/memory-maintenance" },
-      { "name": "openai-api-smoke-test", "source": "skills/openai-api-smoke-test" },
-      { "name": "pdf", "source": "skills/pdf" },
-      { "name": "playwright-interactive", "source": "skills/playwright-interactive" },
-      { "name": "pptx", "source": "skills/pptx" },
-      { "name": "repository-cleanliness", "source": "skills/repository-cleanliness" },
-      { "name": "safe-commit-sync", "source": "skills/safe-commit-sync" },
-      { "name": "screenshot", "source": "skills/screenshot" },
-      { "name": "screenshot-sequence-video", "source": "skills/screenshot-sequence-video" },
-      { "name": "slides", "source": "skills/slides" },
-      { "name": "sora", "source": "skills/sora" },
-      { "name": "speech", "source": "skills/speech" },
-      { "name": "theme-factory", "source": "skills/theme-factory" },
-      { "name": "transcribe", "source": "skills/transcribe" },
-      { "name": "workflow-solidifier", "source": "skills/workflow-solidifier" },
-      { "name": "search-first-skill-script", "source": "skills/search-first-skill-script" },
-      { "name": "skill-portability-auditor", "source": "skills/skill-portability-auditor" },
-      { "name": "skill-self-update", "source": "skills/skill-self-update" }
+      {
+        "name": "agent-browser",
+        "source": "skills/agent-browser"
+      },
+      {
+        "name": "doc",
+        "source": "skills/doc"
+      },
+      {
+        "name": "fail-fast-coding",
+        "source": "skills/fail-fast-coding"
+      },
+      {
+        "name": "imagegen",
+        "source": "skills/imagegen"
+      },
+      {
+        "name": "local-file-links",
+        "source": "skills/local-file-links"
+      },
+      {
+        "name": "markdown-to-pdf",
+        "source": "skills/markdown-to-pdf"
+      },
+      {
+        "name": "memory-maintenance",
+        "source": "skills/memory-maintenance"
+      },
+      {
+        "name": "openai-api-smoke-test",
+        "source": "skills/openai-api-smoke-test"
+      },
+      {
+        "name": "pdf",
+        "source": "skills/pdf"
+      },
+      {
+        "name": "playwright-interactive",
+        "source": "skills/playwright-interactive"
+      },
+      {
+        "name": "pptx",
+        "source": "skills/pptx"
+      },
+      {
+        "name": "repository-cleanliness",
+        "source": "skills/repository-cleanliness"
+      },
+      {
+        "name": "safe-commit-sync",
+        "source": "skills/safe-commit-sync"
+      },
+      {
+        "name": "skill-merge-governor",
+        "source": "skills/skill-merge-governor"
+      },
+      {
+        "name": "screenshot",
+        "source": "skills/screenshot"
+      },
+      {
+        "name": "screenshot-sequence-video",
+        "source": "skills/screenshot-sequence-video"
+      },
+      {
+        "name": "slides",
+        "source": "skills/slides"
+      },
+      {
+        "name": "sora",
+        "source": "skills/sora"
+      },
+      {
+        "name": "speech",
+        "source": "skills/speech"
+      },
+      {
+        "name": "theme-factory",
+        "source": "skills/theme-factory"
+      },
+      {
+        "name": "transcribe",
+        "source": "skills/transcribe"
+      },
+      {
+        "name": "workflow-solidifier",
+        "source": "skills/workflow-solidifier"
+      },
+      {
+        "name": "search-first-skill-script",
+        "source": "skills/search-first-skill-script"
+      },
+      {
+        "name": "skill-portability-auditor",
+        "source": "skills/skill-portability-auditor"
+      },
+      {
+        "name": "skill-self-update",
+        "source": "skills/skill-self-update"
+      }
     ],
     "memories": []
   },
@@ -39,8 +294,9 @@
   ],
   "doctor_checks": [
     "manifest",
+    "workspace-api-version",
     "skills-present",
     "machine-local",
-    "codex-home"
+    "runtime"
   ]
 }
