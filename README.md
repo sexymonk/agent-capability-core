@@ -72,16 +72,6 @@ python .\scripts\doctor.py
 
 The doctor script validates the manifest, expected skill paths, runtime/provider configuration, and machine-local configuration.
 
-## Public installer entrypoint
-
-This repo also hosts the public Windows installer that can bootstrap the private PeriDyno workbench:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\bootstrap\install-peridyno-workbench.ps1
-```
-
-That path installs minimal bootstrap tools, authenticates with GitHub CLI when needed, clones the private workbench, and hands off to the workbench bootstrap.
-
 ## Workspace contract
 
 - `workspace.manifest.yaml` is the exported runtime contract for this repository.
