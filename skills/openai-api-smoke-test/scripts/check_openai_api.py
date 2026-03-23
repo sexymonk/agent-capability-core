@@ -37,14 +37,18 @@ def trim_text(value, limit=160):
 
 def request_json(method, url, headers, timeout, *, payload=None, params=None):
     started = time.perf_counter()
-    response = requests.request(
-        method,
-        url,
-        headers=headers,
-        json=payload,
-        params=params,
-        timeout=timeout,
-    )
+    try:
+        response = requests.request(
+            method,
+            url,
+            headers=headers,
+            json=payload,
+            params=params,
+            timeout=timeout,
+        )
+    except requests.RequestException as exc:
+        latency_ms = round((time.perf_counter() - started) * 1000, 1)
+        return None, {"error": {"message": str(exc), "type": exc.__class__.__name__}}, latency_ms
     latency_ms = round((time.perf_counter() - started) * 1000, 1)
     try:
         body = response.json()
@@ -86,9 +90,9 @@ def check_chat(args):
         args.timeout,
         payload=payload,
     )
-    result["status"] = response.status_code
+    result["status"] = response.status_code if response is not None else None
     result["latency_ms"] = latency_ms
-    if response.ok:
+    if response is not None and response.ok:
         choice = ((body.get("choices") or [{}])[0]).get("message") or {}
         result["ok"] = True
         result["model"] = body.get("model", args.chat_model)
@@ -132,9 +136,9 @@ def check_responses(args):
         args.timeout,
         payload=payload,
     )
-    result["status"] = response.status_code
+    result["status"] = response.status_code if response is not None else None
     result["latency_ms"] = latency_ms
-    if response.ok:
+    if response is not None and response.ok:
         result["ok"] = True
         result["model"] = body.get("model", args.responses_model)
         result["response_id"] = body.get("id")
@@ -165,9 +169,9 @@ def check_images(args):
         args.timeout,
         payload=payload,
     )
-    result["status"] = response.status_code
+    result["status"] = response.status_code if response is not None else None
     result["latency_ms"] = latency_ms
-    if response.ok:
+    if response is not None and response.ok:
         data = body.get("data") or []
         result["ok"] = True
         result["model"] = args.image_model
@@ -202,9 +206,9 @@ def check_admin(args):
         args.timeout,
         params=params,
     )
-    result["status"] = response.status_code
+    result["status"] = response.status_code if response is not None else None
     result["latency_ms"] = latency_ms
-    if response.ok:
+    if response is not None and response.ok:
         buckets = body.get("data") or []
         result["ok"] = True
         result["bucket_count"] = len(buckets)

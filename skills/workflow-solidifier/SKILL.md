@@ -48,9 +48,9 @@ After each meaningful workflow-training session, update this skill when there is
 Promote that learning into:
 
 - `SKILL.md` when the operating process changes
-- [references/workflow-template.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/workflow-template.md) when the reusable scaffold improves
-- [references/workflow-training-manual.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/workflow-training-manual.md) when the coaching handbook for training others improves
-- [references/learning-log.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/learning-log.md) when the session yields durable rules, approved promotions, or avoided paths
+- [references/workflow-template.md](references/workflow-template.md) when the reusable scaffold improves
+- [references/workflow-training-manual.md](references/workflow-training-manual.md) when the coaching handbook for training others improves
+- [references/learning-log.md](references/learning-log.md) when the session yields durable rules, approved promotions, or avoided paths
 
 Do not absorb one-off domain specifics from a single workflow into this meta-skill unless they clearly generalize across workflows.
 
@@ -105,15 +105,15 @@ Always try to capture these:
 
 ## Output pattern
 
-For a reusable workflow skill, keep `SKILL.md` lean and put copyable scaffolds in [references/workflow-template.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/workflow-template.md).
+For a reusable workflow skill, keep `SKILL.md` lean and put copyable scaffolds in [references/workflow-template.md](references/workflow-template.md).
 
-Use [references/learning-log.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/learning-log.md) to record:
+Use [references/learning-log.md](references/learning-log.md) to record:
 
 - durable rules
 - approved workflow promotions
 - avoided paths
 
-Use [references/workflow-training-manual.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/workflow-training-manual.md) when the user wants a guide that can teach other people how to train and freeze their own workflows.
+Use [references/workflow-training-manual.md](references/workflow-training-manual.md) when the user wants a guide that can teach other people how to train and freeze their own workflows.
 That handbook should evolve when bilingual guidance or scenario-based coaching templates materially improve reuse.
 
 ## Validation checklist
@@ -135,4 +135,4 @@ Also check whether the current solidification session taught this skill itself s
 
 ## Reuse template
 
-When building or updating a workflow skill, follow the scaffold in [references/workflow-template.md](/C:/Users/13227/.codex/skills/workflow-solidifier/references/workflow-template.md) instead of inventing a fresh structure every time.
+When building or updating a workflow skill, follow the scaffold in [references/workflow-template.md](references/workflow-template.md) instead of inventing a fresh structure every time.

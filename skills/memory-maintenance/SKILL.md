@@ -45,14 +45,14 @@ Use this skill when the task is about the memory framework itself rather than on
 
 1. Read the owning workspace manifest and identify the target `memory_families`.
 2. Check the family contract against:
-   - [memory-family-v1 schema](/D:/Codex/agent-capability-core/schemas/memory-family-v1.md)
-   - [memory-v2 schema](/D:/Codex/agent-capability-core/schemas/memory-v2.md)
+   - [memory-family-v1 schema](../../schemas/memory-family-v1.md)
+   - [memory-v2 schema](../../schemas/memory-v2.md)
 3. Implement or update the family transformer so the generic core can:
    - render shared source to runtime
    - stage shared source for promote
    - build sidecar docs/relations
    - validate domain-specific invariants
-4. Prefer the generic CLI in [memory_cli.py](/D:/Codex/agent-capability-core/scripts/memory_cli.py) over ad-hoc family scripts.
+4. Prefer the generic CLI in [memory_cli.py](../../scripts/memory_cli.py) over ad-hoc family scripts.
 5. Keep old family entry points as thin wrappers when compatibility matters.
 6. Rebuild indexes and digests after render-related changes.
 7. Run validation before any promote logic.
@@ -90,7 +90,7 @@ Before finishing, verify:
 
 ## Learning maintenance
 
-Maintain [references/learning-log.md](/D:/Codex/agent-capability-core/skills/memory-maintenance/references/learning-log.md) for this skill.
+Maintain [references/learning-log.md](references/learning-log.md) for this skill.
 
 Record:
 

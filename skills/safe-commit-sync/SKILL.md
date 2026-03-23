@@ -58,7 +58,7 @@ Commit and push the intended Git changes while minimizing collateral impact on u
 
 ## Templates and checklists
 
-- Use [templates-and-checklists.md](/C:/Users/13227/.codex/skills/safe-commit-sync/references/templates-and-checklists.md) for:
+- Use [templates-and-checklists.md](references/templates-and-checklists.md) for:
   - standard commit message templates
   - submodule-first commit/push command patterns
   - merge-main validation checklist
