@@ -8,6 +8,7 @@ This file records durable rules, approved workflow promotions, and avoided paths
 
 ## Approved workflow promotions
 - 2026-03-18: When a novel multi-step workflow is completed and the user accepts it or asks to continue without correction, treat that as permission to update an owning skill or create a narrow new skill if no owner exists.
+- 2026-03-25: When a user approves a weekly ecosystem-watch workflow that scans hot projects, writes structured learning records, creates one implementation plan, and performs one safe local execution step, prefer creating a narrow owning skill instead of overloading generic workflow or research skills.
 
 ## Avoided paths
 - 2026-03-18: Do not limit skill learning to explicit user error reports only; this misses reusable workflows that were implicitly approved by continuation.

@@ -33,3 +33,12 @@ This file records durable rules, approved workflow promotions, and avoided paths
 - Avoid leaving coaching conversations fully ad hoc when reusable dialogue patterns have already emerged.
 - Avoid keeping the handbook monolingual when the workflow abstractions are likely to be reused in both Chinese and English.
 - Avoid assuming one scenario template fits investigation, review, reporting, automation, and human-review workflows equally well.
+## 2026-03-24 additive note
+
+### Approved workflow promotions
+
+- Promote repo-owned workflow skills when a trained workflow is highly domain-specific but still durable, for example an isolated QuickLauncher UI E2E regression that bundles scratch-root isolation, overlay config, watchdog supervision, and detailed issue artifacts.
+
+### Avoided paths
+
+- Avoid freezing UI-regression workflows as pure prompt text when they actually need deterministic helper scripts, isolation plumbing, and a formal artifact schema.
