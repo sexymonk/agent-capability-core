@@ -236,10 +236,8 @@ def validate_sequence_images(items: list[SequenceItem]) -> SequenceValidation:
             image_mode = current_mode
             continue
         if (current_width, current_height) != (width, height):
-            raise RuntimeError(
-                f"Mixed image dimensions in sequence {items[0].sequence_id!r}: "
-                f"expected {(width, height)}, got {(current_width, current_height)} at {item.source_path}"
-            )
+            width = max(width, current_width)
+            height = max(height, current_height)
         if current_format != image_format:
             image_format = "MIXED"
         if current_mode != image_mode:
@@ -321,10 +319,17 @@ def write_concat_file(staging_dir: Path, sequence_slug: str, items: list[Sequenc
     return concat_path
 
 
-def build_common_output_args(args: argparse.Namespace, out_path: Path) -> list[str]:
+def build_common_output_args(args: argparse.Namespace, out_path: Path, validation: SequenceValidation) -> list[str]:
+    target_width = validation.width if validation.width % 2 == 0 else validation.width + 1
+    target_height = validation.height if validation.height % 2 == 0 else validation.height + 1
+    vf = (
+        f"fps={args.fps},"
+        f"pad=width={target_width}:height={target_height}:x=(ow-iw)/2:y=(oh-ih)/2:color=black,"
+        f"format={args.pix_fmt}"
+    )
     command = [
         "-vf",
-        f"fps={args.fps},format={args.pix_fmt}",
+        vf,
         "-c:v",
         args.codec,
         "-preset",
@@ -340,7 +345,7 @@ def build_common_output_args(args: argparse.Namespace, out_path: Path) -> list[s
     return command
 
 
-def encode_concat(ffmpeg_exe: Path, args: argparse.Namespace, concat_file: Path, out_path: Path) -> None:
+def encode_concat(ffmpeg_exe: Path, args: argparse.Namespace, concat_file: Path, out_path: Path, validation: SequenceValidation) -> None:
     command = [
         str(ffmpeg_exe),
         "-y" if args.overwrite else "-n",
@@ -353,12 +358,12 @@ def encode_concat(ffmpeg_exe: Path, args: argparse.Namespace, concat_file: Path,
         "0",
         "-i",
         str(concat_file),
-        *build_common_output_args(args, out_path),
+        *build_common_output_args(args, out_path, validation),
     ]
     subprocess.run(command, check=True)
 
 
-def encode_image2(ffmpeg_exe: Path, args: argparse.Namespace, pattern: NumberedPattern, out_path: Path) -> None:
+def encode_image2(ffmpeg_exe: Path, args: argparse.Namespace, pattern: NumberedPattern, out_path: Path, validation: SequenceValidation) -> None:
     command = [
         str(ffmpeg_exe),
         "-y" if args.overwrite else "-n",
@@ -371,7 +376,7 @@ def encode_image2(ffmpeg_exe: Path, args: argparse.Namespace, pattern: NumberedP
         str(pattern.start_number),
         "-i",
         pattern.pattern,
-        *build_common_output_args(args, out_path),
+        *build_common_output_args(args, out_path, validation),
     ]
     subprocess.run(command, check=True)
 
@@ -446,10 +451,10 @@ def main() -> int:
         out_path = output_dir / f"{output_name}.mp4"
         if strategy == "image2":
             assert numbered_pattern is not None
-            encode_image2(ffmpeg_exe, args, numbered_pattern, out_path)
+            encode_image2(ffmpeg_exe, args, numbered_pattern, out_path, validation)
         else:
             concat_file = write_concat_file(staging_dir, output_name, sequence_items, args.fps)
-            encode_concat(ffmpeg_exe, args, concat_file, out_path)
+            encode_concat(ffmpeg_exe, args, concat_file, out_path, validation)
 
         sequence_reports.append(
             {

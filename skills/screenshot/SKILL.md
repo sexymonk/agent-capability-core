@@ -6,6 +6,13 @@ description: "Use when the user explicitly asks for a desktop or system screensh
 
 # Screenshot Capture
 
+## Scope boundary
+
+- This skill covers **still screenshots only**.
+- Do **not** start desktop recording, window recording, or any other screen-recording workflow unless the user **explicitly** asks to record the screen or otherwise gives clear permission for recording.
+- Requests to "show", "demonstrate", "prove", "let me see", or similar do **not** by themselves authorize recording; use still screenshots or plain logs unless the user explicitly approves recording.
+- If Codex needs visual evidence for its own inspection and the user did not authorize recording, prefer one or more screenshots over video capture.
+
 Follow these save-location rules every time:
 
 1) If the user specifies a path, save there.
