@@ -21,6 +21,11 @@ description: "Use when the task involves reading, creating, or editing `.docx` d
 4. If visual review is not possible, extract text with `python-docx` as a fallback and call out layout risk.
 5. Keep intermediate outputs organized and clean up after final approval.
 
+### Windows Unicode safety
+- On Windows, do not generate Chinese or other non-ASCII DOCX content by piping inline Python through PowerShell here-strings or stdin if you can avoid it.
+- Prefer a real UTF-8 `.py` script file, or another Unicode-safe write path, before saving the `.docx`.
+- Verify text by reopening the saved DOCX with `python-docx` or by reading `word/document.xml` from the ZIP directly, rather than trusting terminal output that may be mojibake.
+
 ## Temp and output conventions
 - Use `tmp/docs/` for intermediate files; delete when done.
 - Write final artifacts under `output/doc/` when working in this repo.
@@ -78,6 +83,7 @@ python3 scripts/render_docx.py /path/to/file.docx --output_dir /tmp/docx_pages
 - Re-render and inspect every page at 100% zoom before final delivery.
 - Fix any spacing, alignment, or pagination issues and repeat the render loop.
 - Confirm there are no leftovers (temp files, duplicate renders) unless the user asks to keep them.
+- When the document contains non-ASCII text, do one Unicode-safe content verification step after saving.
 
 ## Learning maintenance
 

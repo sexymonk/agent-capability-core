@@ -77,6 +77,7 @@ Do **not** dump full transcripts or noisy retry history. Keep only lessons likel
 7. Create or update `references/learning-log.md`.
 8. Keep wording concise and reusable; do not encode the whole conversation.
 9. In the reply, state what changed and link the updated local files.
+10. If the update creates a new skill and the user expects immediate reuse, do not assume the new skill will auto-trigger in the current running session; say explicitly that naming the skill or starting a fresh session may still be needed until the skill inventory refreshes.
 
 ## Quality bar
 

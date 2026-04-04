@@ -13,3 +13,12 @@ This file records durable rules, approved workflow promotions, and avoided paths
 ## Avoided paths
 - 2026-03-18: Do not limit skill learning to explicit user error reports only; this misses reusable workflows that were implicitly approved by continuation.
 - 2026-03-18: Do not preserve only the happy path; record concise avoided paths when they explain what future runs should skip.
+
+## 2026-04-02
+
+### Durable rules
+- After creating a new skill for immediate reuse, do not assume it will auto-trigger in the same running session; if immediate reliability matters, tell the user to name the skill explicitly or refresh into a new session until the skill inventory includes it.
+
+### Avoided paths
+- Do not promise that a newly created local skill will automatically govern the rest of the current session without checking whether the session's available-skill inventory already includes it.
+
